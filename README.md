@@ -22,8 +22,8 @@ Or install it yourself as:
 
 ## Usage
 
-@client = TatusTask1Gem1::Client.new(client_id: client_id, client_secret: client_secret, grant_type: grant_type, audience: audience)
-@client.print_token
+@client = TatusTask1Gem1::Client.new(client_id: client_id, client_secret: client_secret)
+@client.all_athletes
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
