@@ -12,3 +12,6 @@ client_secret= ARGV[1]
 
 @client = TatusTask1Gem1::Client.new(client_id: client_id, client_secret: client_secret)
 puts JSON.pretty_generate(@client.all_athletes)
+
+@client2 = TatusTask1Gem1::TokenAPI.new(client_id: client_id, client_secret: client_secret)
+puts @client2.token

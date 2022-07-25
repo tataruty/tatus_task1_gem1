@@ -1,18 +1,18 @@
 require 'faraday'
-require 'active_support/all'
+
 
 module TatusTask1Gem1
-    class TokenClient 
+    class TokenAPI 
         BASE_URL = "https://dev-0erpan4x.us.auth0.com/"
 
         attr_reader :client_id, :client_secret, :adapter
 
-        def is_not_valide(client_id, client_secret)
+        def is_not_valid(client_id, client_secret)
             return client_id.empty? || client_secret.empty?
         end
 
         def initialize(client_id:, client_secret:, adapter: Faraday.default_adapter)
-            raise StandardError.new('wrong input data, exiting!') if is_not_valide(client_id, client_secret)
+            raise StandardError.new('wrong input data, exiting!') if is_not_valid(client_id, client_secret)
             @client_id = client_id
             @client_secret = client_secret
             @grant_type = 'client_credentials'
@@ -41,22 +41,22 @@ module TatusTask1Gem1
         end 
 
         def post 
-            @response = connection.post('/oauth/token') do |req|
+            connection.post('/oauth/token') do |req|
                 req.body = form_data
               end
         end
 
         def token
-            @response = post
-            if @response.status == 200 
-                @response.body['access_token']
+            response = post
+            if response.status == 200 
+                response.body['access_token']
             else
-                puts "Could not get token, got status: #{@response.status}"
+                puts "Could not get token, got status: #{response.status}"
             end 
         end
 
         def inspect
-            "#<TatusTask1Gem1::TokenClient>"
+            "#<TatusTask1Gem1::TokenAPI>"
         end
     end
 end

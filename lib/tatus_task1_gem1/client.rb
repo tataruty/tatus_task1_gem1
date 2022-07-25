@@ -3,14 +3,14 @@ require 'faraday'
 module TatusTask1Gem1
     class Client 
         def initialize(client_id:, client_secret:, adapter: Faraday.default_adapter)
-            @token_client = TatusTask1Gem1::TokenClient.new(client_id: client_id, client_secret: client_secret)
-            token = @token_client.token
+            @token_api = TatusTask1Gem1::TokenAPI.new(client_id: client_id, client_secret: client_secret)
+            token = @token_api.token
             raise StandardError.new('nil token, exiting!') if token.nil?
-            @athletes_client = TatusTask1Gem1::AthletesClient.new(token: token)
+            @athletes_api = TatusTask1Gem1::AthletesAPI.new(token: token)
         end
 
         def all_athletes
-            @athletes_client.athletes
+            @athletes_api.athletes
         end
 
         def inspect

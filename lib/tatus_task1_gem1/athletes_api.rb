@@ -1,17 +1,16 @@
 require 'faraday'
-require 'active_support/all'
 
 module TatusTask1Gem1
-    class AthletesClient 
+    class AthletesAPI 
         BASE_URL = "https://athletedataservice.azurewebsites.net"
         attr_reader :token, :adapter
 
-        def is_valide(token)
+        def is_valid(token)
             return !token.empty?
         end
 
         def initialize(token:, adapter: Faraday.default_adapter)
-            raise StandardError.new('empty token, exiting!') if !is_valide(token)
+            raise StandardError.new('empty token, exiting!') if !is_valid(token)
             @token = token
             @adapter = adapter
         end
@@ -33,7 +32,7 @@ module TatusTask1Gem1
         end
 
         def inspect
-            "#<TatusTask1Gem1::AthletesClient>"
+            "#<TatusTask1Gem1::AthletesAPI>"
         end
     end
 end
