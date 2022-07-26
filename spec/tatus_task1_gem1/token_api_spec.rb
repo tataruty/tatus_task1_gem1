@@ -21,7 +21,7 @@ RSpec.describe(::TatusTask1Gem1::TokenAPI) do
     end
   
     describe('#initialize happy path') do
-      subject(:token) { described_class.new(client_id: client_id, client_secret: client_secret) }
+      subject(:token_api) { described_class.new(client_id: client_id, client_secret: client_secret) }
 
       before do
         stub_request(:post, "https://dev-0erpan4x.us.auth0.com/oauth/token").
@@ -33,20 +33,20 @@ RSpec.describe(::TatusTask1Gem1::TokenAPI) do
       end
 
       it('token body response') do
-        expect(token.post.body).to eq(expected_body)
+        expect(token_api.post.body).to eq(expected_body)
       end
 
       it('get token value') do
-        expect(token.token).to eq(access_token)
+        expect(token_api.token).to eq(access_token)
       end
 
       it('inspect token') do
-        expect(token.inspect).to eq("#<TatusTask1Gem1::TokenAPI>")
+        expect(token_api.inspect).to eq("#<TatusTask1Gem1::TokenAPI>")
       end
   end
 
   describe('#initialize bad response') do
-    subject(:token) { described_class.new(client_id: client_id, client_secret: client_secret) }
+    subject(:token_api) { described_class.new(client_id: client_id, client_secret: client_secret) }
   
     before do
       stub_request(:post, "https://dev-0erpan4x.us.auth0.com/oauth/token").
@@ -58,7 +58,7 @@ RSpec.describe(::TatusTask1Gem1::TokenAPI) do
     end
 
     it('get 400 response') do
-      expect(token.token).to be_nil
+      expect(token_api.token).to be_nil
     end
   end 
 
