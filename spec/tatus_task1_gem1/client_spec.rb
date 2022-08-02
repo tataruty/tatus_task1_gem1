@@ -9,8 +9,6 @@ RSpec.describe(::TatusTask1Gem1::Client) do
     let(:access_token) { 'real-test-token' }
     let(:athletes_file) { 'spec/fixtures/athletes_response.json' }
     let(:expected_athletes_body) { JSON.parse(File.read(athletes_file),symbolize_names: true) }
-    # let(:token_file) { 'spec/fixtures/token.json' }
-    # let(:token_body) { JSON.parse(File.read(token_file)).to_s }
     let(:token_response) do
         {   access_token: "real-test-token",
             scope: "read:summary",
